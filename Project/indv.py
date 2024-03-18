@@ -103,7 +103,7 @@ def load_students(file_name):
     except ValidationError as e:
         print("Validation failed!")
         print(f"Error massage: {e.message}")
-    
+
 
 def main():
     """
