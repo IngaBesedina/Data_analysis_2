@@ -16,9 +16,9 @@ def get_worker():
 
     # Создать словарь.
     return {
-    'name': name,
-    'post': post,
-    'year': year,
+        'name': name,
+        'post': post,
+        'year': year,
     }
 
 
@@ -30,18 +30,18 @@ def display_workers(staff):
     if staff:
         # Заголовок таблицы.
         line = '+-{}-+-{}-+-{}-+-{}-+'.format(
-        '-' * 4,
-        '-' * 30,
-        '-' * 20,
-        '-' * 8
+            '-' * 4,
+            '-' * 30,
+            '-' * 20,
+            '-' * 8
         )
         print(line)
         print(
             '| {:^4} | {:^30} | {:^20} | {:^8} |'.format(
-            "№",
-            "Ф.И.О.",
-            "Должность",
-            "Год"
+                "№",
+                "Ф.И.О.",
+                "Должность",
+                "Год"
             )
         )
         print(line)
@@ -50,17 +50,18 @@ def display_workers(staff):
         for idx, worker in enumerate(staff, 1):
             print(
                 '| {:>4} | {:<30} | {:<20} | {:>8} |'.format(
-                idx,
-                worker.get('name', ''),
-                worker.get('post', ''),
-                worker.get('year', 0)
+                    idx,
+                    worker.get('name', ''),
+                    worker.get('post', ''),
+                    worker.get('year', 0)
                 )
             )
         print(line)
 
     else:
         print("Список работников пуст.")
-    
+
+
 def select_workers(staff, period):
     """
     Выбрать работников с заданным стажем.
@@ -77,6 +78,7 @@ def select_workers(staff, period):
     # Возвратить список выбранных работников.
     return result
 
+
 def save_workers(file_name, staff):
     """
     Сохранить всех работников в файл JSON.
@@ -87,6 +89,7 @@ def save_workers(file_name, staff):
         # Для поддержки кирилицы установим ensure_ascii=False
         json.dump(staff, fout, ensure_ascii=False, indent=4)
 
+
 def load_workers(file_name):
     """
     Загрузить всех работников из файла JSON.
@@ -94,7 +97,8 @@ def load_workers(file_name):
     # Открыть файл с заданным именем для чтения.
     with open(file_name, "r", encoding="utf-8") as fin:
         return json.load(fin)
-    
+
+
 def main():
     """
     Главная функция программы.
@@ -119,7 +123,7 @@ def main():
             # Отсортировать список в случае необходимости.
             if len(workers) > 1:
                 workers.sort(key=lambda item: item.get('name', ''))
-        
+
         elif command == "list":
             # Отобразить всех работников.
             display_workers(workers)
@@ -133,7 +137,7 @@ def main():
             selected = select_workers(workers, period)
             # Отобразить выбранных работников.
             display_workers(selected)
-    
+
         elif command.startswith("save "):
             # Разбить команду на части для выделения имени файла.
             parts = command.split(maxsplit=1)
@@ -162,9 +166,10 @@ def main():
             print("load - загрузить данные из файла;")
             print("save - сохранить данные в файл;")
             print("exit - завершить работу с программой.")
-        
+
         else:
             print(f"Неизвестная команда {command}", file=sys.stderr)
+
 
 if __name__ == '__main__':
     main()
